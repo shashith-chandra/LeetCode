@@ -1,13 +1,11 @@
 public class Solution {
     public int CountConsistentStrings(string allowed, string[] words) {
-        int ans = 0;
-
-        foreach(string word in words)
-        {
-            var allCharExists = word.ToCharArray().All(item => (allowed.ToCharArray().Contains(item)));
-            if(allCharExists) ans++;
-        }
-        return ans;
-        
+       var hashSet = new HashSet<char>(allowed);
+       int ans = 0;
+       foreach(var word in words)
+       {
+        ans += word.Any(c => (!hashSet.Contains(c))) ? 0 : 1;
+       }
+       return ans;
     }
 }
